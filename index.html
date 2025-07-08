@@ -151,15 +151,12 @@
     <!-- Result Modal - This will act as the "separate screen" -->
     <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
-            <p id="resultText" class="text-3xl font-bold text-gray-800 mb-5">
+            <!-- Added text-red-600 class for red color -->
+            <p id="resultText" class="text-3xl font-bold text-red-600 mb-5">
                 You're thinking of the number "XX"
             </p>
             <div class="video-container">
-                <!-- Changed to <video> tag for local video playback -->
-                <!-- IMPORTANT: Replace 'video/video.mp4' with the actual URL where your video is hosted. -->
-                <!-- For local testing, you might need a local web server. -->
-                <!-- Removed 'muted' attribute to allow sound. Autoplay with sound might be restricted by browsers. -->
-                <video id="resultVideo" src="video.mp4" autoplay loop playsinline></video>
+                <video id="resultVideo" src="video/video.mp4" loop playsinline></video>
             </div>
             <button
                 id="playAgainBtn"
@@ -251,27 +248,26 @@
                 await new Promise(resolve => setTimeout(resolve, stage.duration));
             }
 
-            // After all loading stages, hide loading modal and display result in new modal
+            // After all loading stages, hide loading modal
             hideModal(loadingModal);
 
             // Update the result text in the result modal
             resultText.textContent = `You're thinking of the number "${userNumber}"`;
 
-            // Play the video when the result modal is shown
+            // Show the result modal
+            showModal(resultModal);
+
+            // Play the video AFTER the result modal is shown
             if (resultVideo) {
-                // Set the video source. This should be a URL to your video file.
-                // Example: resultVideo.src = 'http://localhost:8000/video/video.mp4';
-                // Or if deployed: resultVideo.src = '/video/video.mp4';
-                resultVideo.src = 'video.mp4'; // This assumes 'video' folder is relative to index.html
+                // Set the video source. This assumes 'video.mp4' is in a 'video' folder relative to this HTML file.
+                resultVideo.src = 'video/video.mp4';
                 resultVideo.load(); // Load the video
                 resultVideo.play().catch(error => {
                     console.warn("Video autoplay prevented:", error);
-                    // This often happens if the video isn't muted or user hasn't interacted.
-                    // If you want autoplay with sound, consider adding a user interaction
-                    // before playing the video, or rely on browser policies.
+                    // This warning might appear if the browser still blocks autoplay with sound.
+                    // Users might need to interact with the video (e.g., click play) to hear sound.
                 });
             }
-            showModal(resultModal); // Show the result modal
         });
 
         /**
