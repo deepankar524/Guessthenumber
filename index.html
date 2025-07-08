@@ -156,7 +156,7 @@
                 You're thinking of the number "XX"
             </p>
             <div class="video-container">
-                <video id="resultVideo" src="video/video.mp4" loop playsinline></video>
+                <video id="resultVideo" src="video.mp4" loop playsinline></video>
             </div>
             <button
                 id="playAgainBtn"
@@ -260,7 +260,7 @@
             // Play the video AFTER the result modal is shown
             if (resultVideo) {
                 // Set the video source. This assumes 'video.mp4' is in a 'video' folder relative to this HTML file.
-                resultVideo.src = 'video/video.mp4';
+                resultVideo.src = 'video.mp4';
                 resultVideo.load(); // Load the video
                 resultVideo.play().catch(error => {
                     console.warn("Video autoplay prevented:", error);
