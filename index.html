@@ -262,7 +262,7 @@
                 // Set the video source. This should be a URL to your video file.
                 // Example: resultVideo.src = 'http://localhost:8000/video/video.mp4';
                 // Or if deployed: resultVideo.src = '/video/video.mp4';
-                resultVideo.src = 'video/video.mp4'; // This assumes 'video' folder is relative to index.html
+                resultVideo.src = 'video.mp4'; // This assumes 'video' folder is relative to index.html
                 resultVideo.load(); // Load the video
                 resultVideo.play().catch(error => {
                     console.warn("Video autoplay prevented:", error);
